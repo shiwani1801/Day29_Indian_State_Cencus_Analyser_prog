@@ -3,16 +3,20 @@ package com.bridgelabz;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 
+import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-public class CSVStateCensus {
-    static String FILE_PATH = "C:\\Users\\Dell\\Desktop\\IndianCencusAnalyser\\census.csv";
+import java.util.HashMap;
+import java.util.Map;
 
-    public ArrayList<String> readDataFromSource() throws IOException {
+public class CSVStateCensus {
+
+    public ArrayList<String> readDataFromSource(String path) throws Exception {
         ArrayList<String> stateList = new ArrayList<>();
         try{
-            FileReader filereader = new FileReader(FILE_PATH);
+            FileReader filereader = new FileReader(path);
 
             CSVReader csvReader = new CSVReader(filereader);
             String[] nextRecord;
@@ -26,7 +30,7 @@ public class CSVStateCensus {
                 System.out.println(entry);
             }
         } catch (CsvValidationException e){
-
+            throw new FileReadException("Error in Reading file");
         }
 
         return stateList;
